@@ -1,0 +1,104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "WEATHER FORECAST",
+    "description": "This is a sample server weather-forecast-app which allows users to receive up-to-date information about the weather at the specified location"
+  },
+  "paths": {
+    "/weather/city": {
+      "post": {
+        "tags": ["Weather"],
+        "summary": "GET CURRENT WEATHER BY NAME",
+        "parameters": [
+          {
+            "name": "city name",
+            "in": "formData",
+            "description": "city to find the weather",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Weather"
+            }
+          },
+          "422": {
+            "description": "City not found"
+          },
+          "400": {
+            "description": "bad query"
+          }
+        }
+      }
+    },
+    "/weather/coordinates": {
+      "post": {
+        "tags": ["Weather"],
+        "summary": "GET CURRENT WEATHER BY COORDINATES",
+        "parameters": [
+          {
+            "lat": "latitude",
+            "in": "formData",
+            "description": "latitude to find the weather",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "lon": "longitude",
+            "in": "formData",
+            "description": "longitude to find the weather",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Weather"
+            }
+          },
+          "422": {
+            "description": "City not found"
+          },
+          "400": {
+            "description": "bad query"
+          }
+        }
+      }
+    }
+  },
+
+
+  "definitions": {
+    "Weather": {
+      "properties": {
+        "weather": {
+          "type": "string"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "currentTemp": {
+        "type": "number"
+      },
+        "minTemp": {
+          "type": "number"
+        },
+        "maxTemp": {
+          "type": "number"
+        },
+        "pressure": {
+          "type": "number"
+        },
+        "windSpeed": {
+          "type": "number"
+        }
+      }
+    }
+  }
+}
