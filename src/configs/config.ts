@@ -3,6 +3,7 @@ const { config } = require("dotenv");
 config();
 
 export const configs = {
-    PORT: process.env.PORT,
-    WEATHER_API_KEY: process.env.WEATHER_API_KEY
+  PORT: process.env.PORT,
+  WEATHER_API_KEY: process.env.WEATHER_API_KEY,
+  WEATHER_API_URL: process.env.WEATHER_API_URL,
 };

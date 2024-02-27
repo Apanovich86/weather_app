@@ -1,15 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import { ObjectSchema } from "joi";
-//import {ApiError} from "../errors/api.error";
+
+import { ApiError } from "../errors/api.error";
 
 class CommonMiddleware {
   public isLocationValid(validator: ObjectSchema) {
     return function (req: Request, res: Response, next: NextFunction) {
       try {
-        const cityName = validator.validate(req.body);
-        if (!cityName) {
-          throw new Error("wrong ID param");
+        const { value, error } = validator.validate(req.body);
+        if (error) {
+          throw new ApiError(error.details[0].message, 400);
         }
+        req.body = value;
         next();
       } catch (e) {
         next(e);
